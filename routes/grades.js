@@ -36,6 +36,12 @@ router.patch("/:d/add", async (req, res) => {
   res.send(user);
 });
 
+// ======================= DELETE ========
+
+router.delete("/", async (req, res) => {
+  const user = await Grade.deleteOne(req.body);
+});
+
 export default router;
 
 // old patch
