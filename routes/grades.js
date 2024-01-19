@@ -38,19 +38,11 @@ router.patch("/:d/add", async (req, res) => {
 
 // ======================= DELETE ========
 
-router.delete("/", async (req, res) => {
-  const user = await Grade.deleteOne(req.body);
+router.delete("/:id/remove", async (req, res) => {
+  const user = await Grade.deleteOne(req.params.id);
+
+  if (!user) res.send("Could Not Delete").status(404);
+  else res.send(user).status(200);
 });
 
 export default router;
-
-// old patch
-
-// router.patch("/:d/add", async (req, res) => {
-//   let user = await Grade.findByIdAndUpdate({ _id: req.params.id });
-
-//   if (!user) return res.send("Grade Not found").status(404);
-//   user.scores.push(req.body);
-//   await user.save();
-//   res.send(user);
-// });
